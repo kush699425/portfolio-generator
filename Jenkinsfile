@@ -11,13 +11,13 @@ pipeline {
 
         stage('Tag Image') {
             steps {
-                sh 'docker tag portfolio-generator:v1 kush699425/portfolio-generator:v1'
+                sh 'docker tag portfolio-generator:v1 kushgohil699/portfolio-generator:v1'
             }
         }
 
         stage('Push Image') {
             steps {
-                sh 'docker push kush699425/portfolio-generator:v1'
+                sh 'docker push kushgohil699/portfolio-generator:v1'
             }
         }
 
@@ -25,10 +25,10 @@ pipeline {
             steps {
                 sh '''
                 ssh ec2-user@13.233.105.33 "
-                podman pull docker.io/kush699425/portfolio-generator:v1
+                podman pull docker.io/kushgohil699/portfolio-generator:v1
                 podman stop portfolio-app || true
                 podman rm portfolio-app || true
-                podman run -d --name portfolio-app -p 5000:5000 docker.io/kush699425/portfolio-generator:v1
+                podman run -d --name portfolio-app -p 5000:5000 docker.io/kushgohil699/portfolio-generator:v1
                 "
                 '''
             }
